@@ -154,6 +154,11 @@ __attribute__((weak)) bool process_record_display_menu_handling_user(uint16_t ke
     switch (keycode) {
         case DISPLAY_MENU:
             return menu_handle_input(menu_input_exit);
+        /* Vial (host) may use a different numeric range for custom keycodes. Some Vial builds
+         * compute DISPLAY_MENU as 0x7E00 when sending runtime remaps. Accept that here as well
+         * so runtime remaps open the menu without requiring a firmware rebuild. */
+        case 0x7E00:
+            return menu_handle_input(menu_input_exit);
         case KC_ESC:
         case KC_BSPC:
         case KC_DEL:
@@ -184,7 +189,7 @@ __attribute__((weak)) bool process_record_display_menu_handling_user(uint16_t ke
  * @return false
  */
 bool process_record_display_menu(uint16_t keycode, keyrecord_t *record) {
-    if (keycode == DISPLAY_MENU && record->event.pressed && !menu_state.is_in_menu) {
+    if ((keycode == DISPLAY_MENU || keycode == 0x7E00) && record->event.pressed && !menu_state.is_in_menu) {
         menu_state.is_in_menu     = true;
         menu_state.selected_child = 0;
         menu_deferred_token       = defer_exec(DISPLAY_MENU_TIMEOUT, display_menu_timeout_handler, NULL);
