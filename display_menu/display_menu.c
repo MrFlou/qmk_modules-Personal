@@ -7,14 +7,20 @@
 #include "deferred_exec.h"
 
 #include DISPLAY_MENU_ENTRY_H
-void display_menu_bongocat_handler(bool selected) {
-    if (selected) {
-        // Call bongocat rendering logic
-        extern void render_bongocats(void);
-        render_bongocats();
-    }
+// The display_menu_bongocat_handler function has been removed as it is obsolete.
+// Only menu_handler_bongocat and display_handler_bongocat should exist for the Bongocat entry.
+// The following functions remain:
+bool menu_handler_bongocat(menu_input_t input) {
+    // No-op: Bongocat is just a display
+    return false;
 }
 
+void display_handler_bongocat(char *text_buffer, size_t buffer_len) {
+    (void)text_buffer;
+    (void)buffer_len;
+    extern void render_bongocats(void);
+    render_bongocats();
+}
 #ifndef DISPLAY_MENU_TIMEOUT
 #    define DISPLAY_MENU_TIMEOUT 30000
 #endif // !DISPLAY_MENU_TIMEOUT
@@ -336,17 +342,4 @@ void housekeeping_task_display_menu(void) {
     keyboard_task_display_menu_pre();
     housekeeping_task_display_menu_kb();
     keyboard_task_display_menu_post();
-}
-
-// Bongocat menu entry handlers
-bool menu_handler_bongocat(menu_input_t input) {
-    // No-op: Bongocat is just a display
-    return false;
-}
-
-void display_handler_bongocat(char *text_buffer, size_t buffer_len) {
-    (void)text_buffer;
-    (void)buffer_len;
-    extern void render_bongocats(void);
-    render_bongocats();
 }

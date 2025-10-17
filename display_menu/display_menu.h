@@ -59,6 +59,10 @@ typedef enum _menu_input_t {
     menu_input_right,
 } menu_input_t;
 
+// Bongocat menu entry handler prototypes
+bool menu_handler_bongocat(menu_input_t input);
+void display_handler_bongocat(char *text_buffer, size_t buffer_len);
+
 typedef struct _menu_entry_t {
     menu_flags_t flags;
     const char  *text;
