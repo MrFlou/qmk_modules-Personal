@@ -30,8 +30,8 @@ __attribute__((weak)) menu_entry_t root_entries[] = {
 #endif // HAPTIC_ENABLE
     DISPLAY_MENU_ENTRY_PARENT("Keymap Settings", "Keymap", keymap_config_entries),
     DISPLAY_MENU_ENTRY_PARENT("Debug Settings", "Debug", debug_entries),
-        // Bongocat menu entry
-        MENU_ENTRY("Bongocat", display_menu_bongocat_handler),
+    // Bongocat menu entry
+    DISPLAY_MENU_ENTRY_CHILD("Bongocat", "Bongocat", bongocat),
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -337,3 +337,16 @@ void housekeeping_task_display_menu(void) {
     housekeeping_task_display_menu_kb();
     keyboard_task_display_menu_post();
 }
+
+// Bongocat menu entry handlers
+bool menu_handler_bongocat(menu_input_t input) {
+    // No-op: Bongocat is just a display
+    return false;
+}
+
+void display_handler_bongocat(char *text_buffer, size_t buffer_len) {
+    (void)text_buffer;
+    (void)buffer_len;
+    extern void render_bongocats(void);
+    render_bongocats();
+}
