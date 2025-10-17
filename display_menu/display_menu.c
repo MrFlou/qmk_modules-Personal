@@ -7,6 +7,13 @@
 #include "deferred_exec.h"
 
 #include DISPLAY_MENU_ENTRY_H
+void display_menu_bongocat_handler(bool selected) {
+    if (selected) {
+        // Call bongocat rendering logic
+        extern void render_bongocats(void);
+        render_bongocats();
+    }
+}
 
 #ifndef DISPLAY_MENU_TIMEOUT
 #    define DISPLAY_MENU_TIMEOUT 30000
